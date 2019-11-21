@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+.b-link {
+  font-family: 'Open Sans', sans-serif;
+  text-decoration: none;
+  margin: 0;
+  cursor: pointer;
+
+  &:hover {
+    color: lighten(#30a0ee, 5%);
+    text-decoration: underline;
+  }
+}
