@@ -16,19 +16,23 @@ fb.auth.onAuthStateChanged(user => {
     fb.reportsCollection
       .orderBy('sendingTime', 'desc')
       .onSnapshot(querySnapshot => {
+        store.commit('setLoading', false)
         let reportsArray = []
         let reportsPrArray = []
+        let counter = 0
         querySnapshot.forEach(doc => {
           //report and reportPr are objects
           let report = doc.data()
           report.id = doc.id
           let reportPr = {}
+          reportPr.index = counter
           reportPr.status = report.status
           reportPr.type = report.type
           reportPr.date = report.sendingDate
           reportPr.time = report.sendingTime
           reportsArray.push(report)
           reportsPrArray.push(reportPr)
+          counter++
         })
         store.commit('setReports', reportsArray)
         store.commit('setReportsPreview', reportsPrArray)
@@ -42,7 +46,8 @@ export const store = new Vuex.Store({
     userProfile: {},
     reports: [],
     reportsPreview: [],
-    selectedReport: 0
+    selectedReport: 0,
+    loading: true
   },
   mutations: {
     setCurrentUser(state, val) {
@@ -59,6 +64,9 @@ export const store = new Vuex.Store({
     },
     setSelectedReport(state, val) {
       state.selectedReport = val
+    },
+    setLoading(state, val) {
+      state.loading = val
     }
   },
   actions: {

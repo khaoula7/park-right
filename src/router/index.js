@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
+import Profile from '../views/Profile.vue'
+import Settings from '../views/Settings.vue'
 import firebase from 'firebase'
 
 Vue.use(VueRouter)
@@ -24,6 +26,24 @@ const routes = [
     path: '/login',
     name: 'login',
     component: Login
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
+    meta: {
+      //meta field is an additional information you can set to your route
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/settings',
+    name: 'Settings',
+    component: Settings,
+    meta: {
+      //meta field is an additional information you can set to your route
+      requiresAuth: true
+    }
   }
 ]
 
