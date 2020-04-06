@@ -13,30 +13,27 @@ fb.auth.onAuthStateChanged(user => {
       store.commit('setUserProfile', doc.data())
     })
     // realtime updates from our reports collection
-    fb.reportsCollection
-      .orderBy('sendingTime', 'desc')
-      .onSnapshot(querySnapshot => {
-        store.commit('setLoading', false)
-        let reportsArray = []
-        let reportsPrArray = []
-        let counter = 0
-        querySnapshot.forEach(doc => {
-          //report and reportPr are objects
-          let report = doc.data()
-          report.id = doc.id
-          let reportPr = {}
-          reportPr.index = counter
-          reportPr.status = report.status
-          reportPr.type = report.type
-          reportPr.date = report.sendingDate
-          reportPr.time = report.sendingTime
-          reportsArray.push(report)
-          reportsPrArray.push(reportPr)
-          counter++
-        })
-        store.commit('setReports', reportsArray)
-        store.commit('setReportsPreview', reportsPrArray)
+    fb.reportsCollection.orderBy('status', 'desc').onSnapshot(querySnapshot => {
+      store.commit('setLoading', false)
+      let reportsArray = []
+      let reportsPrArray = []
+      let counter = 0
+      querySnapshot.forEach(doc => {
+        //report and reportPr are objects
+        let report = doc.data()
+        report.id = doc.id
+        let reportPr = {}
+        reportPr.index = counter
+        reportPr.status = report.status
+        reportPr.type = report.type
+        reportPr.time = report.sendingTime
+        reportsArray.push(report)
+        reportsPrArray.push(reportPr)
+        counter++
       })
+      store.commit('setReports', reportsArray)
+      store.commit('setReportsPreview', reportsPrArray)
+    })
   }
 })
 
@@ -46,7 +43,6 @@ export const store = new Vuex.Store({
     userProfile: {},
     reports: [],
     reportsPreview: [],
-    selectedReport: 0,
     loading: true
   },
   mutations: {
@@ -62,9 +58,7 @@ export const store = new Vuex.Store({
     setReportsPreview(state, val) {
       state.reportsPreview = val
     },
-    setSelectedReport(state, val) {
-      state.selectedReport = val
-    },
+
     setLoading(state, val) {
       state.loading = val
     }

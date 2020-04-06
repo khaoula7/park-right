@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="jumbo-style">
+  <v-container class="jumbo-style">
     <v-row no-gutters>
       <v-col cols="4">
         <div class="headline pl-3">
@@ -33,11 +33,7 @@ import { mapState } from 'vuex'
 export default {
   name: 'Jumbotron',
   data() {
-    return {
-      total: 564,
-      checked: 198,
-      pending: 366
-    }
+    return {}
   },
   computed: {
     ...mapState(['userProfile', 'reports']),

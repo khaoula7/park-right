@@ -22,5 +22,13 @@ const currentUser = auth.currentUser
 // firebase collections
 const usersCollection = db.collection('Users')
 const reportsCollection = db.collection('Violations')
+const reasonsCollection = db.collection('Reasons')
 
-export { db, auth, currentUser, usersCollection, reportsCollection }
+export {
+  db,
+  auth,
+  currentUser,
+  usersCollection,
+  reportsCollection,
+  reasonsCollection
+}

@@ -1,18 +1,28 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+//@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap');
+
+$black: #000;
 $primary: #015495;
 $secondary: #19bdd3;
-$white: #fff;
+$white: #ffffff;
 $light: #53bfd6;
 $lightgrey: #eef1f4;
 $medium: #999999;
 $dark: #35495e;
 $error: #ef5777;
+
+#app {
+  background: $white;
+  font-family: 'Open Sans', sans-serif;
+}
+
 .b-link {
   font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
   text-decoration: none;
   margin: 0;
   cursor: pointer;
-
   &:hover {
     color: lighten(#30a0ee, 5%);
     text-decoration: underline;

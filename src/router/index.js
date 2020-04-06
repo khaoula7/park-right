@@ -1,9 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Login from '../views/Login.vue'
+// import Login from '../views/Login.vue'
+import Signin from '../views/Signin.vue'
+import Reset from '../views/Reset.vue'
+import Report from '../views/Report.vue'
 import Profile from '../views/Profile.vue'
-import Settings from '../views/Settings.vue'
+import ContactAdmin from '../views/ContactAdmin.vue'
 import firebase from 'firebase'
 
 Vue.use(VueRouter)
@@ -17,15 +20,35 @@ const routes = [
     path: '/',
     name: 'home',
     component: Home,
+    title: 'Home Page - Example App',
     meta: {
       //meta field is an additional information you can set to your route
       requiresAuth: true
     }
   },
+  // {
+  //   path: '/login',
+  //   name: 'login',
+  //   component: Login
+  // },
   {
-    path: '/login',
-    name: 'login',
-    component: Login
+    path: '/signin',
+    name: 'signin',
+    component: Signin
+  },
+  {
+    path: '/reset',
+    name: 'Reset',
+    component: Reset
+  },
+  {
+    path: '/report/:id',
+    name: 'report',
+    component: Report,
+    meta: {
+      //meta field is an additional information you can set to your route
+      requiresAuth: true
+    }
   },
   {
     path: '/profile',
@@ -37,13 +60,9 @@ const routes = [
     }
   },
   {
-    path: '/settings',
-    name: 'Settings',
-    component: Settings,
-    meta: {
-      //meta field is an additional information you can set to your route
-      requiresAuth: true
-    }
+    path: '/contactadmin',
+    name: 'ContactAdmin',
+    component: ContactAdmin
   }
 ]
 
@@ -56,7 +75,7 @@ router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth)
   const currentUser = firebase.auth().currentUser
   if (requiresAuth && !currentUser) {
-    next('/login')
+    next('/signin')
   } else if (requiresAuth && currentUser) {
     next()
   } else {
